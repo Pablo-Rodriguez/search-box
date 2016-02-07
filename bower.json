@@ -1,0 +1,27 @@
+{
+  "name": "search-box",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Pablo-Rodriguez/search-box",
+  "authors": [
+    "Pablo-Rodriguez <pablorp1996@gmail.com>"
+  ],
+  "description": "Search-box web component made with Polymer and baconjs",
+  "main": "search-box.html",
+  "moduleType": [],
+  "keywords": [
+    "search",
+    "box",
+    "polymer",
+    "bacon",
+    "web",
+    "component"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
