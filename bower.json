@@ -23,5 +23,11 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "iron-ajax": "PolymerElements/iron-ajax#^1.0.0",
+    "paper-input": "PolymerElements/paper-input#^1.0.0",
+    "bacon": "~0.7.83",
+    "polymer": "~1.2.4"
+  }
 }
