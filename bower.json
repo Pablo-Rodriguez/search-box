@@ -25,9 +25,8 @@
     "tests"
   ],
   "dependencies": {
-    "iron-ajax": "PolymerElements/iron-ajax#^1.0.0",
     "paper-input": "PolymerElements/paper-input#^1.0.0",
-    "bacon": "~0.7.83",
-    "polymer": "~1.2.4"
+    "polymer": "~1.2.4",
+    "automatic-search-behavior": "~0.1.1"
   }
 }

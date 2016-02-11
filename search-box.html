@@ -1,6 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<script src="../bacon/dist/Bacon.min.js"></script>
-<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../automatic-search-behavior/automatic-search-behavior.html">
 <link rel="import" href="../paper-input/paper-input.html">
 
 <dom-module id="search-box">
@@ -10,13 +9,6 @@
         display: block;
       }
     </style>
-    <iron-ajax
-      id="req"
-      url="{{url}}"
-      handle-as="json"
-      on-request="handleRequest"
-      on-response="handleResponse"
-      last-response="{{lastResponse}}"></iron-ajax>
     <paper-input id="input" label="{{label}}"></paper-input>
   </template>
 </dom-module>
@@ -25,51 +17,23 @@
   (function () {
     Polymer({
       is: 'search-box',
+      behaviors: [ASB.AutomaticSearchBehavior],
       properties: {
         url: {
           type: String,
           value: '/'
         },
+        asbConfig: {
+          value: function () {
+            return {
+              node: this.$.input
+            };
+          }
+        },
         label: {
           type: String,
           value: ''
-        },
-        debounce: {
-          type: Number,
-          value: 300
-        },
-        minQueryLength: {
-          type: Number,
-          value: 3
-        },
-        lastResponse: {
-          type: Array,
-          notify: true,
-          value: function () {return [];}
         }
-      },
-      _request: function (query) {
-        this.$.req.params = {q: query};
-        return Bacon.fromEvent(this.$.req.generateRequest().xhr, 'load');
-      },
-      ready: function () {
-        var input = this.$.input
-        var query = Bacon.fromEvent(input, 'keyup')
-          .debounce(this.debounce).map(function () { return input.value;})
-          .filter(function (value) {
-            return value.length >= this.minQueryLength;
-          }.bind(this))
-          .skipDuplicates().toProperty('');
-        var request = query.changes().flatMapLatest(this._request.bind(this));
-        query.changes().awaiting(request).onValue(function (x) {
-          if(x) this.fire('waiting')
-        }.bind(this));
-      },
-      handleRequest: function (e) {
-        this.fire('request');
-      },
-      handleResponse: function (e) {
-        this.fire('response', e.detail)
       }
     });
   })()
